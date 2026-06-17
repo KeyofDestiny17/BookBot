@@ -1,22 +1,24 @@
-def get_num_words(text):
+def get_num_words(text: str) -> int:
     return len(text.split())
 
-def symbols_counter(text):
-    character_count = {}
+
+def symbols_counter(text: str) -> dict[str, int]:
+    character_count: dict[str, int] = {}
     lower_case = text.lower()
-    for lower in lower_case:
-        if lower in character_count:
-            character_count[lower] += 1
+    for char in lower_case:
+        if char in character_count:
+            character_count[char] += 1
         else:
-            character_count[lower] = 1
+            character_count[char] = 1
     return character_count
 
-def sort_on(d):
-    return d["num"]
 
-def sorted_count(dictionary):
-    list_sorting = []
-    for d in dictionary:
-        list_sorting.append({"char": d, "num": dictionary[d]})
-    list_sorting.sort(reverse=True, key=sort_on)
-    return list_sorting
+def sort_on(char_count: tuple[str, int]) -> int:
+    return char_count[1]
+
+
+def chars_dict_to_sorted_list(character_counts: dict[str, int]) -> list[tuple[str, int]]:
+    chars_sorted_list: list[tuple[str, int]] = []
+    for char, count in character_counts.items():
+        chars_sorted_list.append((char, count))
+    return sorted(chars_sorted_list, reverse=True, key=sort_on)
